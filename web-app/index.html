@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Munim Ji - Your Morning Pulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            touch-action: pan-y;
+            background: #ffffff;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 30%, #e8ecf1 60%, #f0f4f8 100%);
+            z-index: -1;
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            color: #1a1a1a;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 0;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .user-name {
+            color: #F6A623;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .date {
+            color: rgba(26,26,26,0.5);
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .subheading {
+            color: rgba(26,26,26,0.6);
+            font-size: 16px;
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+
+        .greeting {
+            color: #1a1a1a;
+            font-size: 40px;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: rgba(26,26,26,0.5);
+            font-size: 15px;
+            line-height: 22px;
+            font-weight: 300;
+        }
+
+        /* Section Label */
+        .section-label-container {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .section-label {
+            color: rgba(26,26,26,0.4);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(26,26,26,0.1);
+        }
+
+        /* Card Stack */
+        .card-stack {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            max-width: 420px;
+            height: 500px;
+            border-radius: 32px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9));
+            border: 1px solid rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .card.dragging {
+            cursor: grabbing;
+            transition: none;
+        }
+
+        .card.next {
+            transform: scale(0.92) translateY(20px);
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .card.current {
+            z-index: 2;
+        }
+
+        .badge-container {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+
+        .badge.money { background: #4CAF50; }
+        .badge.kids { background: #FF9800; }
+        .badge.govt { background: #2196F3; }
+        .badge.phone { background: #E91E63; }
+        .badge.shop { background: #9C27B0; }
+
+        .icon-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background: linear-gradient(135deg, rgba(246,166,35,0.1), rgba(246,166,35,0.05));
+            border: 1px solid rgba(246,166,35,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .text-container {
+            padding-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            line-height: 34px;
+        }
+
+        .card-body {
+            font-size: 16px;
+            color: rgba(26,26,26,0.7);
+            line-height: 24px;
+            font-weight: 300;
+        }
+
+        /* Swipe Indicator */
+        .swipe-indicator {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 48px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .swipe-indicator.left {
+            left: 40px;
+        }
+
+        .swipe-indicator.right {
+            right: 40px;
+        }
+
+        .swipe-indicator.visible {
+            opacity: 1;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            color: rgba(26,26,26,0.4);
+            padding: 40px;
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .greeting {
+                font-size: 32px;
+            }
+
+            .card {
+                height: 450px;
+            }
+
+            .card-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="top-row">
+                <div class="user-name">Munim Ji</div>
+                <div class="date" id="dateDisplay"></div>
+            </div>
+            <div class="subheading">🌞 Your Morning Pulse</div>
+            <div class="greeting">🙏 Shubh Prabhat!</div>
+            <div class="subtitle">You're vibing as a Morning Devotee today.</div>
+        </div>
+
+        <!-- Section Label -->
+        <div class="section-label-container">
+            <div class="section-label">FOR YOU RIGHT NOW</div>
+            <div class="section-line"></div>
+        </div>
+
+        <!-- Card Stack -->
+        <div class="card-stack" id="cardStack">
+            <div class="loading">Loading cards...</div>
+        </div>
+
+        <!-- Swipe Indicators -->
+        <div class="swipe-indicator left" id="leftIndicator">👎</div>
+        <div class="swipe-indicator right" id="rightIndicator">👍</div>
+    </div>
+
+    <script>
+        // Card data - embedded directly from cards_output.json
+        const CARD_DATA = {
+            "cards": [
+                {
+                    "type": "money",
+                    "title": "दुकान का रोज़ हिसाब",
+                    "body": "आज दुकान बंद करते समय 5 मिनट में गिन लें: (1) कैश बॉक्स में कितना, (2) UPI से कितना आया, (3) Khatabook में आज कितना उधार बढ़ा/घटा। फोटो लेकर रोज़ाना तुलना करें।"
+                },
+                {
+                    "type": "kids",
+                    "title": "बच्चों की कॉपी चेक",
+                    "body": "रोज़ शाम 20 मिनट बच्चों से स्कूल की कॉपी ज़रूर देखिए। आसान तरीका: वही दिन का होमवर्क मोबाइल से फोटो खींचकर WhatsApp पर सुरक्षित रखिए, भूलें तो फोटो से याद दिला सकते हैं।"
+                },
+                {
+                    "type": "govt",
+                    "title": "फ्री इलाज योजना",
+                    "body": "अगर घर में आय कम है और आपका नाम राशन कार्ड / गरीबी लाइन लिस्ट में है, तो Ayushman Bharat कार्ड से 5 लाख तक फ्री इलाज मिल सकता है। नज़दीकी सरकारी अस्पताल या CSC सेंटर पर पता करिए।"
+                },
+                {
+                    "type": "phone",
+                    "title": "जगह और डाटा बचाएँ",
+                    "body": "आपके फोन में सिर्फ़ लगभग 3GB जगह खाली है, इससे ऐप स्लो हो सकते हैं। आज ही WhatsApp में Media वाले बड़े वीडियो डिलीट करें और YouTube पर क्वालिटी 144p/240p रखिए, डाटा और जगह दोनों बचेंगे।"
+                }
+            ]
+        };
+
+        // Configuration
+        const SWIPE_THRESHOLD = 100;
+        
+        // State
+        let cards = [];
+        let currentIndex = 0;
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+
+        // Elements
+        const cardStack = document.getElementById('cardStack');
+        const leftIndicator = document.getElementById('leftIndicator');
+        const rightIndicator = document.getElementById('rightIndicator');
+
+        // Icon mapping
+        const iconMap = {
+            money: '💰',
+            kids: '👨‍👩‍👧',
+            govt: '🏛',
+            phone: '📱',
+            shop: '🛒',
+            info: '✨'
+        };
+
+        // Initialize
+        function init() {
+            setDate();
+            loadCards();
+            renderCards();
+        }
+
+        function setDate() {
+            const dateEl = document.getElementById('dateDisplay');
+            const today = new Date();
+            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            dateEl.textContent = today.toLocaleDateString('en-US', options);
+        }
+
+        function loadCards() {
+            cards = CARD_DATA.cards || [];
+            
+            if (cards.length === 0) {
+                cards = [{
+                    type: 'info',
+                    title: 'कोई सुझाव नहीं मिला',
+                    body: 'थोड़ी देर बाद फिर से कोशिश करें।'
+                }];
+            }
+            console.log('Loaded cards:', cards);
+        }
+
+        function createCardElement(card, index) {
+            const cardEl = document.createElement('div');
+            cardEl.className = 'card';
+            cardEl.dataset.index = index;
+            
+            if (index === currentIndex) {
+                cardEl.classList.add('current');
+            } else if (index === (currentIndex + 1) % cards.length) {
+                cardEl.classList.add('next');
+            } else {
+                cardEl.style.display = 'none';
+            }
+
+            const icon = iconMap[card.type] || iconMap.info;
+
+            cardEl.innerHTML = `
+                <div class="badge-container">
+                    <div class="badge ${card.type}">${card.type.toUpperCase()}</div>
+                </div>
+                <div class="icon-container">
+                    <div class="icon-circle">${icon}</div>
+                </div>
+                <div class="text-container">
+                    <div class="card-title">${card.title}</div>
+                    <div class="card-body">${card.body}</div>
+                </div>
+            `;
+
+            // Add event listeners for drag
+            cardEl.addEventListener('mousedown', handleDragStart);
+            cardEl.addEventListener('touchstart', handleDragStart);
+
+            return cardEl;
+        }
+
+        function renderCards() {
+            cardStack.innerHTML = '';
+            cards.forEach((card, index) => {
+                const cardEl = createCardElement(card, index);
+                cardStack.appendChild(cardEl);
+            });
+
+            // Add global listeners
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('touchmove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+            document.addEventListener('touchend', handleDragEnd);
+        }
+
+        function handleDragStart(e) {
+            const card = e.currentTarget;
+            if (!card.classList.contains('current')) return;
+
+            isDragging = true;
+            card.classList.add('dragging');
+            
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            startX = clientX;
+            currentX = clientX;
+        }
+
+        function handleDragMove(e) {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            currentX = clientX;
+            
+            const deltaX = currentX - startX;
+            const currentCard = document.querySelector('.card.current');
+            
+            if (currentCard) {
+                const rotation = deltaX / 20;
+                currentCard.style.transform = `translateX(${deltaX}px) rotate(${rotation}deg)`;
+                
+                // Show indicators
+                if (deltaX > 30) {
+                    rightIndicator.classList.add('visible');
+                    leftIndicator.classList.remove('visible');
+                } else if (deltaX < -30) {
+                    leftIndicator.classList.add('visible');
+                    rightIndicator.classList.remove('visible');
+                } else {
+                    leftIndicator.classList.remove('visible');
+                    rightIndicator.classList.remove('visible');
+                }
+            }
+        }
+
+        function handleDragEnd(e) {
+            if (!isDragging) return;
+
+            isDragging = false;
+            const deltaX = currentX - startX;
+            const currentCard = document.querySelector('.card.current');
+            
+            leftIndicator.classList.remove('visible');
+            rightIndicator.classList.remove('visible');
+
+            if (currentCard) {
+                currentCard.classList.remove('dragging');
+
+                if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+                    // Swipe complete
+                    const direction = deltaX > 0 ? 'right' : 'left';
+                    const targetX = direction === 'right' ? window.innerWidth : -window.innerWidth;
+                    
+                    currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    currentCard.style.transform = `translateX(${targetX}px) rotate(${deltaX / 10}deg)`;
+                    currentCard.style.opacity = '0';
+
+                    setTimeout(() => {
+                        handleSwipe(direction);
+                    }, 300);
+                } else {
+                    // Return to center
+                    currentCard.style.transition = 'transform 0.3s ease';
+                    currentCard.style.transform = '';
+                }
+            }
+        }
+
+        function handleSwipe(direction) {
+            const card = cards[currentIndex % cards.length];
+            
+            if (direction === 'right') {
+                console.log('LIKE:', card.title);
+                alert(`Opening topic: ${card.title}`);
+            } else {
+                console.log('DISLIKE:', card.title);
+            }
+
+            // Move to next card
+            currentIndex++;
+            if (currentIndex >= cards.length) {
+                currentIndex = 0; // Loop back
+            }
+
+            renderCards();
+        }
+
+        // Initialize app
+        init();
+    </script>
+</body>
+</html>
+
