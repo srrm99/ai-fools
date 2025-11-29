@@ -1,0 +1,299 @@
+{
+  "user_profile": {
+    "summary": "Hindi-speaking kirana shop owner in Vidisha (Madhya Pradesh), using a low-end Android phone as the main tool for shop operations, payments, family coordination, and entertainment. Very price- and data-sensitive, relies on WhatsApp, PhonePe, Khatabook, and JioMart Partner, with strong interest in local news, government schemes, mandi rates, and kids’ education.",
+    "demographics": {
+      "location": {
+        "city": "Vidisha",
+        "district": "Vidisha",
+        "state": "Madhya Pradesh",
+        "country": "India",
+        "setting": "Tier-2 / semi-urban-rural belt"
+      },
+      "likely_profile": {
+        "age_range": "28-45",
+        "gender_likely": "male (based on kirana owner pattern, not certain)",
+        "occupation": "Small kirana (grocery) shop owner",
+        "education": "Up to secondary/higher secondary, practical digital knowledge",
+        "family_context": "Lives with family; has school-going children (school SMS alerts present)"
+      }
+    },
+    "lifestyle": {
+      "routines": {
+        "workday": "Runs kirana shop most of the day; short-radius movement (home–shop–market–school–petrol pump).",
+        "device_use_pattern": "Phone is on all day; peak interaction 19:00–21:00 after/before shop hours.",
+        "charging_habit": "Regular overnight charging (22:00–06:00); low power mode enabled during day to save battery."
+      },
+      "mobility": {
+        "commute_radius_km": 3,
+        "rarely_travels_outside_district": true,
+        "frequent_places": [
+          "Kirana shop",
+          "Market road",
+          "Petrol pump",
+          "School",
+          "Home"
+        ]
+      },
+      "media_habits": {
+        "entertainment": "YouTube, JioTV, JioCinema on weekends and evenings; prefers short, free, low-data content.",
+        "social": "WhatsApp is primary communication; Facebook Lite and local short-video apps (Moj/Josh/ShareChat) for casual browsing."
+      }
+    },
+    "digital_behavior": {
+      "device_capabilities": {
+        "brand_model": "Redmi A2 (Android 13 Go Edition)",
+        "class": "low_end",
+        "ram_gb": 2,
+        "storage_total_gb": 32,
+        "storage_free_gb": 3.2,
+        "battery_health_percent": 78,
+        "constraints": [
+          "Low RAM → frequent app slowdowns if heavy/too many apps open",
+          "Low free storage → risk of app crashes/updates failing",
+          "Battery health below ideal → needs power-efficient experiences"
+        ]
+      },
+      "connectivity": {
+        "primary_network": "Jio 4G (weak signal ~ -108 dBm)",
+        "wifi_available": false,
+        "data_saver_enabled": true,
+        "hotspot_usage_level": "high (likely shares data with family/second device)",
+        "behavior": "Very data-conscious, prefers lightweight, compressed, offline-friendly content."
+      },
+      "apps_and_usage": {
+        "core_apps": [
+          "WhatsApp",
+          "YouTube",
+          "PhonePe",
+          "Khatabook",
+          "JioMart Partner",
+          "Facebook Lite",
+          "MyJio",
+          "JioTV/JioCinema",
+          "Opera Mini (primary browser)"
+        ],
+        "business_use": [
+          "Khatabook for credit/ledger and lending reminders",
+          "JioMart Partner for inventory/wholesale",
+          "PhonePe/Paytm for UPI and recharges",
+          "Bank SMS for account and cashflow awareness"
+        ],
+        "behavior_patterns": {
+          "heavy_usage_days": [
+            "Monday",
+            "Thursday"
+          ],
+          "weekend": "Entertainment (YouTube/JioCinema/JioTV) spikes.",
+          "first_week_month": "Higher PhonePe usage for bills and regular payments.",
+          "crop_season": "More agriculture/Kisan app usage and mandi-related queries."
+        }
+      },
+      "language_and_input": {
+        "primary_language": "Hindi (hi-IN)",
+        "script": "Reads Hindi comfortably; can handle simple Hinglish/English terms (UPI, offer, cashback).",
+        "voice_usage": "Uses voice queries in Hindi for weather, prices, recharge balance, and free sports streaming.",
+        "browsing_search_queries": [
+          "Mandi/commodity prices in Hindi",
+          "Government schemes and benefits",
+          "Cheap phones and data plans",
+          "Live cricket scores"
+        ]
+      },
+      "digital_literacy_level": {
+        "overall": "Intermediate practical user",
+        "strengths": [
+          "Comfortable with UPI, OTPs for logins, bank alerts, app installs/updates.",
+          "Uses specialized apps (Khatabook, JioMart Partner, IRCTC RailLite, DigiLocker)."
+        ],
+        "gaps": [
+          "Limited understanding of complex security/scam patterns.",
+          "Likely discomfort with long English text and complex multi-step flows."
+        ]
+      }
+    },
+    "financial_behavior": {
+      "cash_and_digital_mix": {
+        "shop_finance": "Manages daily cash, customer credit, and repayments via Khatabook and SMS reminders.",
+        "digital_payments": "Frequent PhonePe/Paytm usage; many OTP/bank SMS; relies on UPI for recharges, bills, and some supplier payments."
+      },
+      "patterns": {
+        "first_week_month": "Pays bills and EMIs, likely settles some dues; needs clarity on cashflow.",
+        "credit_management": "Extends credit to customers (Khatabook), tracks repayments; gets automated reminders SMS."
+      },
+      "preferences": {
+        "likes": [
+          "Small savings tips",
+          "Simple EMI and loan calculators",
+          "Daily expense tracking in very simple format",
+          "Clear troubleshooting for failed UPI or delayed SMS alerts"
+        ],
+        "risk_appetite": "Conservative; more interested in protecting income and reducing losses than in risky investments."
+      }
+    },
+    "content_preferences": {
+      "news_and_info": {
+        "topics": [
+          "Local MP/Vidisha news",
+          "Government schemes and eligibility",
+          "Loan/EMI reminders and planning",
+          "Weather and rainfall updates",
+          "Petrol/diesel prices"
+        ],
+        "style": "Short, Hindi summaries with clear actions (how to apply, what to do today)."
+      },
+      "entertainment": {
+        "format": "Short YouTube clips, cricket highlights, free live streams (data-saving), music via Gaana Lite/JioSaavn.",
+        "timing": "Mostly evenings and weekends."
+      },
+      "commerce_and_shopping": {
+        "shop_related": [
+          "Offers on groceries (sugar, dal, oil, staples)",
+          "Wholesale/partner deals via JioMart Partner",
+          "Affordable business supplies (packets, bags, basic inventory items)"
+        ],
+        "personal": [
+          "Low-cost smartphones",
+          "Cheapest data/recharge plans",
+          "Household utility deals"
+        ],
+        "decision_style": "Very price-sensitive; compares ‘sasta’ options; values clear savings (Rs off / cashback)."
+      },
+      "life_advice": {
+        "focus": [
+          "Simple health tips",
+          "Guidance for children’s education and scholarships",
+          "Local employment/skill programs",
+          "Basic insurance (health/life) explained in ultra-simple Hindi"
+        ]
+      }
+    },
+    "risk_signals": {
+      "device_and_data": {
+        "low_storage": true,
+        "low_storage_detail": "Only ~3.2 GB free of 32 GB; risk of failed updates, slow phone, media not saving.",
+        "low_end_device": true,
+        "battery_health_moderate": true,
+        "battery_low_power_mode": true,
+        "weak_network_signal": true,
+        "no_wifi_dependency_on_mobile_data": true,
+        "data_saver_on": true
+      },
+      "security_and_scams": {
+        "many_otps_and_financial_sms": true,
+        "risk": "Higher exposure to UPI/OTP fraud, fake scheme links, and phishing via SMS/WhatsApp.",
+        "needs": [
+          "Simple guidance on not sharing OTP/PIN",
+          "Recognition of scam patterns in Hindi",
+          "Safe-usage nudges during payments"
+        ]
+      }
+    },
+    "pain_points": {
+      "technology": [
+        "Phone slows down or hangs due to low RAM and storage.",
+        "Weak 4G signal causes video buffering and failed app actions.",
+        "Heavy apps/websites consume too much data.",
+        "Updates or new apps sometimes can’t install due to space."
+      ],
+      "financial_and_business": [
+        "Managing customer credit and timely repayments.",
+        "Keeping track of many small expenses and payments.",
+        "Understanding which government schemes they or family/shop can benefit from.",
+        "Confusion or stress when UPI payments are delayed or fail."
+      ],
+      "information_access": [
+        "Too much text or English-heavy content is tiring.",
+        "Hard to distinguish genuine government/loan schemes from spam or fraud."
+      ]
+    },
+    "motivations": {
+      "short_term": [
+        "Run the shop smoothly each day with clear view of payments and dues.",
+        "Get the best prices for goods (buying and selling).",
+        "Save on mobile recharges and data usage.",
+        "Keep family updated and children’s school matters in control."
+      ],
+      "long_term": [
+        "Grow shop income steadily and reduce bad debts.",
+        "Use the right government schemes/loans without getting cheated.",
+        "Improve children’s education and future opportunities.",
+        "Protect health and finances with basic insurance/savings."
+      ]
+    },
+    "recommended_tone": "Respectful and peer-like, in simple Hindi with light Hinglish where natural (e.g., ‘UPI’, ‘offer’, ‘balance’). Use short sentences, step-by-step instructions, and practical examples from a kirana shop. Avoid heavy jargon and long paragraphs. Offer voice input and read-out responses where possible, and occasionally reassure about safety (e.g., reminders not to share OTPs)."
+  },
+  "meet_state": {
+    "moment_assessment": "User is on a low-end phone with weak 4G signal, low power mode ON, moderate battery (~40%), and low storage. Likely in a practical, task-oriented mode (quick check or action) rather than relaxed long browsing. Data- and battery-conscious; wants fast, lightweight, useful help, not long videos or heavy pages.",
+    "immediate_needs": [
+      "Quick access to today’s local mandi/commodity prices (e.g., garlic, staples) and weather for planning purchases and sales.",
+      "Fast view of payment/ledger-related info (dues from customers, recent UPI confirmations).",
+      "Simple check of mobile data/recharge status and suggestion of cheapest suitable plan if getting low.",
+      "Local news or scheme updates in brief, if not in urgent task mode.",
+      "Easy way to check live cricket score or short highlights without heavy data usage."
+    ],
+    "recommended_content_cards": [
+      "“आज के मंडी रेट और मौसम” – One-tap card showing today’s local mandi prices and weather in Hindi.",
+      "“पेमेंट और उधार हालत” – Summary card: today’s received UPI payments + a quick list of pending Khatabook dues (no sensitive data, just counts/amount ranges).",
+      "“डाटा / रीचार्ज स्टेटस” – Data left today, pack expiry, and 1–2 best ‘sस्ते’ recharge plan suggestions.",
+      "“आज की ज़रूरी खबरें (लोकल + सरकारी योजना)” – 3–5 bullet headlines in Hindi with ‘और पढ़ें’ option.",
+      "“क्रिकेट स्कोर (लो डाटा)” – Live score + small text commentary option, no auto-playing video.",
+      "“स्टोरेज और फोन हेल्थ” – Simple card: free space, basic cleanup suggestion (delete large WhatsApp media / old downloads)."
+    ],
+    "recommended_tools": [
+      "Mandi price checker with location-based rates in Hindi.",
+      "Simple UPI issue helper (step-by-step guidance for ‘payment pending/failed’, ‘SMS नहीं आया’, etc.).",
+      "Daily cashflow/EMI calculator for kirana shop (very basic: income, खर्च, उधार, बचत).",
+      "Recharge planner: compares current usage with available Jio plans and suggests 1–2 best fits.",
+      "Low-storage cleaner: guide user to delete big videos/images/duplicates safely without touching important documents/WhatsApp chats.",
+      "Weather and rainfall forecast for 3–5 days, in Hindi, optimized for low data.",
+      "Scam-safety coach: short, Hindi checklists on OTP, UPI PIN, and fake loan/scheme links."
+    ],
+    "best_opening_line": "नमस्ते! मैं आपके किराना दुकान और रोज़मर्रा के काम में मदद के लिए हूँ — अभी आपको किसमें जल्दी मदद चाहिए: आज के रेट/मौसम, पेमेंट/उधार, या रीचार्ज और डाटा?",
+    "safety_alerts": [
+      "स्टोरेज लगभग भर चुका है (केवल ~3 GB खाली) — ज़्यादा फोटो/वीडियो या नए ऐप से फोन और स्लो हो सकता है; ज़रूरत हो तो मैं आपको सुरक्षित तरीके से साफ़ करने में मदद कर सकता हूँ।",
+      "नेटवर्क सिग्नल कमज़ोर है; ऑनलाइन पेमेंट या बड़ा डाउनलोड करने से पहले ध्यान रखें, बीच में रुक सकता है।",
+      "बहुत सारे OTP और बैंक मैसेज आते हैं — किसी को भी OTP, UPI PIN या लिंक पर क्लिक करके पेमेंट अप्रूव न करें; चाहें तो मैं आपको जल्दी से ‘स्कैम पहचान’ के आसान नियम समझा सकता हूँ।",
+      "बैटरी हेल्थ बहुत अच्छी नहीं है और लो-पावर मोड चल रहा है; लंबा वीडियो/डाउनलोड बैटरी ज़्यादा खा सकता है, अभी के लिए हल्का कंटेंट बेहतर रहेगा।"
+    ]
+  },
+  "personalization_strategy": {
+    "daily_hooks": [
+      "हर सुबह या दुकान खोलने के समय एक छोटा ‘आज का मंडी रेट + मौसम’ कार्ड और दो लाइन का सारांश, हिंदी में, होम स्क्रीन पर दिखाएँ।",
+      "शाम 7–9 बजे के बीच ‘आज के पेमेंट और उधार का हल्का सारांश’ (कुल कितना आया, कितना बाकी) दिखाएँ, बिना कोई जटिल ग्राफ़ या बहुत टेक्स्ट।",
+      "दिन में एक बार ‘डाटा और बैटरी बचत टिप’ दिखाएँ — जैसे YouTube को कितने डेटा में कैसे कम क्वालिटी पर देखें, बैकग्राउंड ऐप्स कैसे कंट्रोल करें।",
+      "WhatsApp पर अक्सर रहने के कारण: ‘WhatsApp से फोटो/वीडियो कैसे कम जगह लें’ जैसे एक-लाइन टिप्स, सीधे, स्टेप-बाय-स्टेप।",
+      "त्वरित वॉइस-असिस्ट बटन (Hindi mic icon) हमेशा आसानी से दिखे, ताकि यूज़र टाइप करने के बजाय बोलकर पूछ सके।"
+    ],
+    "weekly_needs": [
+      "सप्ताह की शुरुआत (सोमवार) को ‘इस हफ़्ते के खर्च और उधार प्लान’ का बहुत साधारण प्लानर सुझाएँ (3 फ़ील्ड: कितना आना है, कितना देना है, कितना बचत करनी है).",
+      "हर हफ़्ते 1–2 बार ‘सरकारी योजना और दुकान/परिवार के लिए फायदा’ का छोटा हिंदी पोस्ट, साथ में आसान चेकलिस्ट: कौन पात्र है, कैसे अप्लाई करें।",
+      "वीकेंड पर ‘मनोरंजन + सीख’ मिक्स: हल्का क्रिकेट/मनोरंजन और साथ में 1 छोटा फायनेंस टिप (जैसे उधार कम कैसे रखें, EMI टाइम पर कैसे दें).",
+      "महीने की पहली तारीखों के आस-पास ‘बिल/EMI रिमाइंडर और चेकलिस्ट’ — फोन/डेटा, बिजली, लोन/EMI को 1 स्क्रीन पर याद दिलाना।",
+      "फसल/क्रॉप सीज़न से पहले ‘कृषि और खरीद-दाम गाइड’ का सरल हिंदी सारांश (मंडी रेट ट्रेंड, बारिश की संभावना, बेसिक सलाह)."
+    ],
+    "long_term_strategy": [
+      "हमेशा हिंदी-प्रथम इंटरफ़ेस रखें; जटिल शब्दों के बदले रोज़मर्रा की बोली (थोड़ा Hinglish चल सकता है, पर आधार हिंदी रहे).",
+      "बहुत छोटे-छोटे भरोसेमंद मोमेंट बनाएं: जब भी कोई पेमेंट गाइडेंस या स्कैम-वॉर्निंग दें, सरल भाषा + कोई डेटा/OTP न लेने की गारंटी दोहराएँ।",
+      "इंटरफ़ेस को हल्का और तेज़ रखें: कोई भारी ऐनिमेशन या बड़े इमेज/वीडियो डिफ़ॉल्ट से न लोड हों; ज़रूरत पर ‘वीडियो चलाएँ (डाटा ~x MB)’ जैसा साफ़ इशारा हो।",
+      "कम स्टोरेज और कम RAM के हिसाब से ‘लाइटवेट’ मोड को डिफ़ॉल्ट रखें: ऑफ़लाइन या कम-डेटा जवाब, टेक्स्ट-फर्स्ट, इमेज/वीडियो वैकल्पिक।",
+      "किराना दुकान के लिए खास फीचर बनाकर भरोसा बढ़ाएँ: जैसे उधार नोट/एक्सेल टेम्पलेट, प्रिंटेबल रेट लिस्ट, साधारण स्टॉक लिस्ट, ताकि यूज़र को महसूस हो कि सिस्टम ‘दुकानदार के लिए ही बना है’।",
+      "समय-समय पर ‘आपका डेटा सुरक्षित है’ जैसी साफ़, पारदर्शी जानकारी दिखाएँ — कौन सी परमिशन क्यों चाहिए, और क्या नहीं किया जा रहा (जैसे कभी OTP नहीं मांगते)।"
+    ],
+    "avoid_showing": [
+      "ऑटो-प्ले वीडियो, बड़े बैनर, या हाई-रेज़ इमेज जो डेटा और बैटरी बहुत खर्च करें।",
+      "लंबे, सिर्फ़-अंग्रेज़ी लेख या PDF जो यूज़र को पढ़ने में थका दें।",
+      "बहुत जटिल ग्राफ़, चार्ट या एक साथ बहुत ज़्यादा नंबर; इसके बजाय साधारण ‘कुल कितना’ और ‘आज/कल का फ़र्क’ जैसा दिखाएँ।",
+      "जुआ, सट्टा, क्रिप्टो, या हाई-रिस्क इन्वेस्टमेंट जैसे कंटेंट, जो उनकी ज़रूरत/प्रोफ़ाइल से मेल नहीं खाते और नुकसानदेह हो सकते हैं.",
+      "बहुत ‘मेट्रो-स्टाइल’ ऑफ़र (जैसे केवल बड़े शहरों के फूड डिलीवरी या लक्ज़री ब्रांड डील) जो उनके लिए प्रासंगिक नहीं लगेंगे।",
+      "बार-बार नोटिफ़िकेशन जिससे यूज़र चिड़चिड़ा हो; नोटिफ़िकेशन को सीमित, उपयोगी और समय-सही रखें।"
+    ],
+    "adoption_drivers": [
+      "एक-टैप हिंदी वॉइस इनपुट: ‘बोलकर पूछें’ बटन से यूज़र को जल्दी मदद मिले, टाइपिंग की झंझट कम हो।",
+      "तेज़, हल्के और ऑफ़लाइन-फ्रेंडली जवाब जो कम डेटा में खुलें और स्लो नेटवर्क पर भी काम चलाएँ।",
+      "स्पष्ट तौर पर ‘दुकानदार के लिए बने’ काम: उधार मैनेजमेंट टिप्स, रेट-लिस्ट, स्टॉक/ख़रीद-फ़ैसले में मदद, कस्टमर सर्विस स्क्रिप्ट्स आदि।",
+      "रीचार्ज और डेटा बचत में असली मदद: सबसे सस्ता प्लान सुझाना, कौन सा वीडियो कितने MB लेगा, ऐसे पारदर्शी संकेत।",
+      "सुरक्षा और भरोसा: हर पेमेंट या OTP-संबंधित बातचीत में साफ़ लिखें कि ChatGPT कभी OTP/UPI PIN नहीं मांगेगा; साथ में 2–3 आसान सुरक्षा नियम दें।",
+      "छोटे-छोटे, तुरंत फायदेमंद सुझाव: आज की बचत (₹X तक), आज का बेहतर स्टॉक फ़ैसला, या आज किस ग्राहक से पैसे वसूलने की प्राथमिकता — इससे टूल की वैल्यू रोज़ दिखती रहेगी।"
+    ]
+  }
+}

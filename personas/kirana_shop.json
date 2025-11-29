@@ -1,0 +1,225 @@
+{
+    "id": "kirana_shop_owner_india2",
+    "label": "Kirana Shop Owner (India 2 / Bharat Tier)",
+    "schema_version": 1,
+    "tags": ["india2", "bharat", "kirana", "low_end_device", "rural"],
+  
+    "device": {
+      "brand": "Redmi",
+      "model": "Redmi A2",
+      "device_class": "low_end",
+      "os": "Android 13 Go Edition",
+      "security_patch": "2024-08-01",
+      "ram_gb": 2,
+      "storage_total_gb": 32,
+      "storage_free_gb": 3.2,
+      "processor": "MediaTek Helio A22",
+      "battery_level_percent": 42,
+      "battery_health_percent": 78,
+      "battery_charging_state": "disconnected",
+      "battery_low_power_mode": true,
+      "battery_charging_pattern": "22:00-06:00",
+      "display": {
+        "resolution_px": {"width": 360, "height": 720},
+        "dpi_class": "MDPI",
+        "refresh_rate_hz": 60,
+        "brightness_level_percent": 22,
+        "auto_brightness": false
+      }
+    },
+  
+    "location": {
+      "coordinates": {"lat": 23.8352, "lon": 77.4531},
+      "city": "Vidisha",
+      "district": "Vidisha",
+      "state": "Madhya Pradesh",
+      "country": "India",
+      "postal_code": "464001",
+      "accuracy_m": 75,
+      "altitude_m": 408,
+      "tower_id": "MP-JIO-TWR-7745",
+      "network_region": "Central Telecom Zone",
+      "nearest_market_hub": "Ganj Basoda"
+    },
+  
+    "network": {
+      "primary_network": "Jio 4G",
+      "signal_strength_dbm": -108,
+      "data_mode": "4G_fallback_3G",
+      "wifi_available": false,
+      "hotspot_usage_level": "high",
+      "daily_data_limit_remaining_mb": 340,
+      "data_saver_enabled": true,
+      "roaming_enabled": false
+    },
+  
+    "apps": {
+      "counts": {
+        "total_installed": 64,
+        "user_apps": 22,
+        "system_apps": 42
+      },
+      "categories": {
+        "social": 4,
+        "payments_finance": 4,
+        "shopping": 3,
+        "entertainment": 3,
+        "news": 2,
+        "utilities": 5,
+        "other": 43
+      },
+      "top_installed": [
+        "WhatsApp",
+        "YouTube",
+        "PhonePe",
+        "Facebook Lite",
+        "JioMart Partner",
+        "Khatabook",
+        "JioTV",
+        "JioCinema",
+        "Truecaller",
+        "MyJio"
+      ],
+      "other_common": [
+        "Paytm",
+        "Moj",
+        "ShareChat",
+        "Josh",
+        "Gaana Lite / JioSaavn",
+        "JioCloud",
+        "DigiLocker",
+        "IRCTC RailLite",
+        "MAPS.ME",
+        "Aarogya Setu",
+        "JioSwitch",
+        "Local Language News App (e.g., Dainik Bhaskar / Amar Ujala)",
+        "Opera Mini (preferred browser)"
+      ],
+      "rare_possible": [
+        "mParivahan",
+        "UMANG",
+        "Krishi Setu / Kisan apps",
+        "Local co-op society app",
+        "Local chit fund app",
+        "Recharge apps (FreeCharge, etc.)"
+      ],
+      "usage": {
+        "daily_foreground_minutes": {
+          "WhatsApp": 65,
+          "YouTube": 45,
+          "JioMart Partner": 12,
+          "PhonePe": 8,
+          "Khatabook": 6,
+          "Google Search": 3,
+          "Facebook Lite": 10
+        },
+        "heavy_usage_days": ["Monday", "Thursday"],
+        "weekly_behavior": {
+          "weekend": "YouTube and entertainment usage spikes",
+          "first_week_month": "High PhonePe usage for bill payments",
+          "crop_season": "More frequent usage of Kisan / agriculture apps"
+        }
+      }
+    },
+  
+    "communication": {
+      "sms_total_analyzed": 36,
+      "sms_types_counts": {
+        "otps": 18,
+        "bank_alerts": 7,
+        "recharges": 4,
+        "delivery_updates": 3,
+        "family_messages": 4
+      },
+      "most_active_hours": "19:00-21:00",
+      "top_contacts": [
+        {"id": "VM-PAYTMPY", "messages": 6},
+        {"id": "BP-JIOINF", "messages": 4},
+        {"id": "VM-PNBOTP", "messages": 4},
+        {"id": "Brother", "messages": 3},
+        {"id": "Supplier", "messages": 2}
+      ],
+      "message_themes": [
+        "Payment confirmations",
+        "Lending reminders (Khatabook)",
+        "Transport / parcel notifications",
+        "Government scheme updates",
+        "School alerts for children"
+      ]
+    },
+  
+    "behavior": {
+      "audio_voice": {
+        "input_language": "hi-IN",
+        "common_voice_queries": [
+          "आज का मौसम क्या है",
+          "आज के दाम क्या है",
+          "रीचार्ज कितना बचा है",
+          "फ्री क्रिकेट लाइव"
+        ]
+      },
+      "navigation": {
+        "commute_radius_km": 3,
+        "frequent_places": [
+          "Kirana shop",
+          "Market road",
+          "Petrol pump",
+          "School",
+          "Home"
+        ],
+        "rarely_travels_outside_district": true
+      },
+      "browser_search": {
+        "preferred_browsers": ["Opera Mini", "Chrome Lite"],
+        "typical_queries": [
+          "लहसुन का भाव आज",
+          "सरकारी योजना 2025",
+          "सस्ता मोबाइल",
+          "सस्ता डेटा प्लान",
+          "आज का क्रिकेट स्कोर"
+        ]
+      }
+    },
+  
+    "interests": {
+      "news_preferences": [
+        "Local MP news",
+        "Government schemes",
+        "Loan / EMI reminders",
+        "Weather",
+        "Petrol / diesel prices"
+      ],
+      "finance_preferences": [
+        "Small savings",
+        "Loan EMI calculators",
+        "Daily expenditure tracking",
+        "UPI problem troubleshooting",
+        "Cashflow tips for small shops"
+      ],
+      "life_advice_preferences": [
+        "Health tips",
+        "Kids education",
+        "Local employment programs",
+        "Insurance basics"
+      ],
+      "shopping_preferences": [
+        "Recharge plans",
+        "Budget phones",
+        "Household items",
+        "Small business supplies",
+        "Offers on sugar, dal, oil"
+      ]
+    },
+  
+    "privacy_permissions": {
+      "location": true,
+      "contacts": true,
+      "camera": true,
+      "storage": true,
+      "background_data_restricted_for_many_apps": true,
+      "notification_access": "partial",
+      "accessibility_apis": false
+    },
+  
+    "notes": "Tier-2 Bharat kirana shop owner using low-end Android phone as primary business and personal device."
+  }
