@@ -838,8 +838,13 @@
         }
 
         function handleDragStart(e) {
-            const card = e.currentTarget;
-            if (!card.classList.contains('current')) return;
+            const card = e.currentTarget.closest('.card');
+            if (!card || !card.classList.contains('current')) return;
+
+            // Prevent drag if clicking on chat input area
+            if (e.target.closest('.chat-input-container')) {
+                return;
+            }
 
             isDragging = true;
             card.classList.add('dragging');
@@ -932,8 +937,61 @@
         // Chat Overlay Functions
         let currentChatCard = null;
         let chatMessages = [];
+        const OPENROUTER_API_KEY = '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'; // Load from your .env in production
 
-        function openChatOverlay(card, initialMessage) {
+        async function callOpenRouterLLM(cardContext, userMessage, conversationHistory) {
+            try {
+                const messages = [
+                    {
+                        role: 'system',
+                        content: `You are a helpful AI assistant. The user is looking at a personalized card with the following information:
+                        
+Title: ${cardContext.title}
+Content: ${cardContext.body}
+Card Type: ${cardContext.type}
+
+Answer their questions about this card in simple Hindi (or Hinglish). Be helpful, concise, and relevant to the card content.`
+                    },
+                    ...conversationHistory,
+                    {
+                        role: 'user',
+                        content: userMessage
+                    }
+                ];
+
+                const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+                        'HTTP-Referer': window.location.origin,
+                        'X-Title': 'AI Persona Cards'
+                    },
+                    body: JSON.stringify({
+                        model: 'openai/gpt-5.1',
+                        messages: messages,
+                        extra_body: {
+                            reasoning: {
+                                enabled: true
+                            }
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || 'API call failed');
+                }
+
+                const data = await response.json();
+                return data.choices[0].message.content;
+            } catch (error) {
+                console.error('OpenRouter API Error:', error);
+                return `क्षमा करें, मुझे आपके सवाल का जवाब देने में समस्या आ रही है। कृपया फिर से कोशिश करें। (Sorry, I'm having trouble answering your question. Please try again.)`;
+            }
+        }
+
+        async function openChatOverlay(card, initialMessage) {
             currentChatCard = card;
             chatMessages = [];
 
@@ -944,16 +1002,30 @@
             // Add initial user message
             addMessageToChat('user', initialMessage);
 
-            // Add AI placeholder response
-            setTimeout(() => {
-                addMessageToChat('ai', 'यह एक प्लेसहोल्डर उत्तर है। जल्द ही AI से वास्तविक उत्तर मिलेगा। (This is a placeholder response. Real AI integration coming soon.)');
-            }, 500);
+            // Show loading indicator
+            const loadingMsg = addMessageToChat('ai', '⏳ जवाब तैयार कर रहा हूं...');
 
             // Show overlay
             document.getElementById('chatOverlay').classList.add('active');
             
             // Focus on bottom input
             document.getElementById('chatBottomInput').focus();
+
+            // Call LLM
+            const conversationHistory = chatMessages
+                .filter(msg => msg.type !== 'loading')
+                .map(msg => ({
+                    role: msg.type === 'user' ? 'user' : 'assistant',
+                    content: msg.text
+                }));
+
+            const aiResponse = await callOpenRouterLLM(card, initialMessage, conversationHistory);
+
+            // Remove loading message
+            loadingMsg.remove();
+
+            // Add AI response
+            addMessageToChat('ai', aiResponse);
         }
 
         function closeChatOverlay() {
@@ -987,20 +1059,34 @@
             chatMessages.push({ type, text });
         }
 
-        function sendChatMessage() {
+        async function sendChatMessage() {
             const input = document.getElementById('chatBottomInput');
             const message = input.value.trim();
 
-            if (!message) return;
+            if (!message || !currentChatCard) return;
 
             // Add user message
             addMessageToChat('user', message);
             input.value = '';
 
-            // Simulate AI response (placeholder)
-            setTimeout(() => {
-                addMessageToChat('ai', 'धन्यवाद! मैं आपके सवाल को समझ रहा हूं। जल्द ही AI एकीकरण होने पर आपको विस्तृत जवाब मिलेगा। (Thank you! I understand your question. Detailed answers coming soon with AI integration.)');
-            }, 800);
+            // Show loading indicator
+            const loadingMsg = addMessageToChat('ai', '⏳ सोच रहा हूं...');
+
+            // Call LLM with conversation history
+            const conversationHistory = chatMessages
+                .filter(msg => msg.type !== 'loading')
+                .map(msg => ({
+                    role: msg.type === 'user' ? 'user' : 'assistant',
+                    content: msg.text
+                }));
+
+            const aiResponse = await callOpenRouterLLM(currentChatCard, message, conversationHistory);
+
+            // Remove loading message
+            loadingMsg.remove();
+
+            // Add AI response
+            addMessageToChat('ai', aiResponse);
         }
 
         // Event listeners for chat overlay
