@@ -44,6 +44,7 @@ web-app/index.html
 ├── web-app/
 │   └── index.html                 # Interactive web app to display cards
 ├── run_profile_builder.py         # Main script: persona → LLM → profile
+├── update_web_cards.py            # Update web app with latest cards
 └── requirements.txt               # Python dependencies
 ```
 
@@ -137,6 +138,35 @@ open web-app/index.html
 - Mobile-responsive
 - Hindi text support
 - Swipe right to like, left to dislike
+- **Chat interface** below each card for follow-up questions
+
+### Step 4: Update Web App with New Cards (Optional)
+
+If you generate cards for a different persona, update the web app:
+
+```bash
+python3 update_web_cards.py
+```
+
+**What it does:**
+- Reads the latest `frontend/cards/cards_output.json`
+- Updates `web-app/index.html` with new card data
+- Maintains all styling and functionality
+
+**Workflow for multiple personas:**
+```bash
+# 1. Generate profile for new persona
+python3 run_profile_builder.py
+
+# 2. Generate cards
+cd frontend/cards && python3 generate_cards.py && cd ../..
+
+# 3. Update web app
+python3 update_web_cards.py
+
+# 4. Open/refresh browser
+open web-app/index.html
+```
 
 ## 🎯 Example Use Case: Kirana Shop Owner
 

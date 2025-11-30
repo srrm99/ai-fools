@@ -123,7 +123,7 @@
             position: absolute;
             width: 100%;
             max-width: 420px;
-            height: 500px;
+            height: 580px;
             border-radius: 32px;
             background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9));
             border: 1px solid rgba(0,0,0,0.08);
@@ -152,6 +152,18 @@
 
         .card.current {
             z-index: 2;
+        }
+
+        .card-content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: grab;
+        }
+
+        .card-content-wrapper:active {
+            cursor: grabbing;
         }
 
         .badge-container {
@@ -212,6 +224,320 @@
             font-weight: 300;
         }
 
+        /* Chat Input */
+        .chat-input-container {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            cursor: text;
+            user-select: auto;
+            touch-action: auto;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(246,166,35,0.05);
+            border: 1px solid rgba(246,166,35,0.2);
+            border-radius: 16px;
+            padding: 12px 16px;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input-wrapper:hover {
+            background: rgba(246,166,35,0.08);
+            border-color: rgba(246,166,35,0.3);
+        }
+
+        .chat-input-wrapper:focus-within {
+            background: rgba(255,255,255,0.95);
+            border-color: #F6A623;
+            box-shadow: 0 0 0 3px rgba(246,166,35,0.1);
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #1a1a1a;
+            outline: none;
+        }
+
+        .chat-input::placeholder {
+            color: rgba(26,26,26,0.4);
+        }
+
+        .chat-send-btn {
+            background: #F6A623;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .chat-input-wrapper:focus-within .chat-send-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .chat-send-btn:hover {
+            background: #e89615;
+            transform: scale(1.05);
+        }
+
+        .chat-send-btn:active {
+            transform: scale(0.95);
+        }
+
+        .chat-send-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Chat Overlay */
+        .chat-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 30%, #e8ecf1 60%, #f0f4f8 100%);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+        }
+
+        .chat-overlay.active {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+        }
+
+        .chat-close-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.05);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chat-close-btn:hover {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .chat-header-text {
+            flex: 1;
+        }
+
+        .chat-header-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .chat-header-subtitle {
+            font-size: 13px;
+            color: rgba(26,26,26,0.5);
+            font-weight: 300;
+        }
+
+        .chat-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .chat-card-context {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .chat-context-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(26,26,26,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .chat-context-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .chat-context-body {
+            font-size: 14px;
+            color: rgba(26,26,26,0.7);
+            line-height: 20px;
+            font-weight: 300;
+        }
+
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chat-message {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .chat-message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #F6A623;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .chat-message.ai .chat-message-avatar {
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+        }
+
+        .chat-message-bubble {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 12px 16px;
+            max-width: 70%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .chat-message.user .chat-message-bubble {
+            background: #F6A623;
+            border-color: #F6A623;
+            color: white;
+        }
+
+        .chat-message-text {
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 300;
+        }
+
+        .chat-message.ai .chat-message-text {
+            color: #1a1a1a;
+        }
+
+        .chat-input-bottom {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            background: white;
+        }
+
+        .chat-input-bottom-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .chat-input-bottom input {
+            flex: 1;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(246,166,35,0.05);
+            border-radius: 16px;
+            padding: 14px 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #1a1a1a;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input-bottom input:focus {
+            border-color: #F6A623;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(246,166,35,0.1);
+        }
+
+        .chat-input-bottom input::placeholder {
+            color: rgba(26,26,26,0.4);
+        }
+
+        .chat-input-bottom-send {
+            width: 48px;
+            height: 48px;
+            background: #F6A623;
+            border: none;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .chat-input-bottom-send:hover {
+            background: #e89615;
+            transform: scale(1.05);
+        }
+
+        .chat-input-bottom-send:active {
+            transform: scale(0.95);
+        }
+
+        .chat-input-bottom-send svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
         /* Swipe Indicator */
         .swipe-indicator {
             position: fixed;
@@ -251,11 +577,15 @@
             }
 
             .card {
-                height: 450px;
+                height: 520px;
             }
 
             .card-title {
                 font-size: 24px;
+            }
+
+            .chat-message-bubble {
+                max-width: 85%;
             }
         }
     </style>
@@ -291,32 +621,77 @@
         <div class="swipe-indicator right" id="rightIndicator">👍</div>
     </div>
 
+    <!-- Chat Overlay -->
+    <div class="chat-overlay" id="chatOverlay">
+        <div class="chat-header">
+            <button class="chat-close-btn" id="chatCloseBtn">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="chat-header-text">
+                <div class="chat-header-title">Chat with AI</div>
+                <div class="chat-header-subtitle" id="chatSubtitle">Ask follow-up questions</div>
+            </div>
+        </div>
+        
+        <div class="chat-content">
+            <div class="chat-card-context" id="chatCardContext">
+                <div class="chat-context-label">Card Context</div>
+                <div class="chat-context-title" id="chatContextTitle">Title</div>
+                <div class="chat-context-body" id="chatContextBody">Body</div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+        </div>
+        
+        <div class="chat-input-bottom">
+            <div class="chat-input-bottom-wrapper">
+                <input 
+                    type="text" 
+                    id="chatBottomInput" 
+                    placeholder="Type your follow-up question..."
+                    autocomplete="off"
+                >
+                <button class="chat-input-bottom-send" id="chatBottomSend">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Card data - embedded directly from cards_output.json
         const CARD_DATA = {
             "cards": [
-                {
-                    "type": "money",
-                    "title": "दुकान का रोज़ हिसाब",
-                    "body": "आज दुकान बंद करते समय 5 मिनट में गिन लें: (1) कैश बॉक्स में कितना, (2) UPI से कितना आया, (3) Khatabook में आज कितना उधार बढ़ा/घटा। फोटो लेकर रोज़ाना तुलना करें।"
-                },
-                {
-                    "type": "kids",
-                    "title": "बच्चों की कॉपी चेक",
-                    "body": "रोज़ शाम 20 मिनट बच्चों से स्कूल की कॉपी ज़रूर देखिए। आसान तरीका: वही दिन का होमवर्क मोबाइल से फोटो खींचकर WhatsApp पर सुरक्षित रखिए, भूलें तो फोटो से याद दिला सकते हैं।"
-                },
-                {
-                    "type": "govt",
-                    "title": "फ्री इलाज योजना",
-                    "body": "अगर घर में आय कम है और आपका नाम राशन कार्ड / गरीबी लाइन लिस्ट में है, तो Ayushman Bharat कार्ड से 5 लाख तक फ्री इलाज मिल सकता है। नज़दीकी सरकारी अस्पताल या CSC सेंटर पर पता करिए।"
-                },
-                {
-                    "type": "phone",
-                    "title": "जगह और डाटा बचाएँ",
-                    "body": "आपके फोन में सिर्फ़ लगभग 3GB जगह खाली है, इससे ऐप स्लो हो सकते हैं। आज ही WhatsApp में Media वाले बड़े वीडियो डिलीट करें और YouTube पर क्वालिटी 144p/240p रखिए, डाटा और जगह दोनों बचेंगे।"
-                }
+                        {
+                                    "type": "money",
+                                    "title": "दुकान का रोज़ हिसाब",
+                                    "body": "आज दुकान बंद करते समय 5 मिनट में गिन लें: (1) कैश बॉक्स में कितना, (2) UPI से कितना आया, (3) Khatabook में आज कितना उधार बढ़ा/घटा। फोटो लेकर रोज़ाना तुलना करें।"
+                        },
+                        {
+                                    "type": "kids",
+                                    "title": "बच्चों की कॉपी चेक",
+                                    "body": "रोज़ शाम 20 मिनट बच्चों से स्कूल की कॉपी ज़रूर देखिए। आसान तरीका: वही दिन का होमवर्क मोबाइल से फोटो खींचकर WhatsApp पर सुरक्षित रखिए, भूलें तो फोटो से याद दिला सकते हैं।"
+                        },
+                        {
+                                    "type": "govt",
+                                    "title": "फ्री इलाज योजना",
+                                    "body": "अगर घर में आय कम है और आपका नाम राशन कार्ड / गरीबी लाइन लिस्ट में है, तो Ayushman Bharat कार्ड से 5 लाख तक फ्री इलाज मिल सकता है। नज़दीकी सरकारी अस्पताल या CSC सेंटर पर पता करिए।"
+                        },
+                        {
+                                    "type": "phone",
+                                    "title": "जगह और डाटा बचाएँ",
+                                    "body": "आपके फोन में सिर्फ़ लगभग 3GB जगह खाली है, इससे ऐप स्लो हो सकते हैं। आज ही WhatsApp में Media वाले बड़े वीडियो डिलीट करें और YouTube पर क्वालिटी 144p/240p रखिए, डाटा और जगह दोनों बचेंगे।"
+                        }
             ]
-        };
+};
 
         // Configuration
         const SWIPE_THRESHOLD = 100;
@@ -374,6 +749,7 @@
             const cardEl = document.createElement('div');
             cardEl.className = 'card';
             cardEl.dataset.index = index;
+            cardEl.dataset.cardData = JSON.stringify(card);
             
             if (index === currentIndex) {
                 cardEl.classList.add('current');
@@ -386,21 +762,63 @@
             const icon = iconMap[card.type] || iconMap.info;
 
             cardEl.innerHTML = `
-                <div class="badge-container">
-                    <div class="badge ${card.type}">${card.type.toUpperCase()}</div>
+                <div class="card-content-wrapper">
+                    <div class="badge-container">
+                        <div class="badge ${card.type}">${card.type.toUpperCase()}</div>
+                    </div>
+                    <div class="icon-container">
+                        <div class="icon-circle">${icon}</div>
+                    </div>
+                    <div class="text-container">
+                        <div class="card-title">${card.title}</div>
+                        <div class="card-body">${card.body}</div>
+                    </div>
                 </div>
-                <div class="icon-container">
-                    <div class="icon-circle">${icon}</div>
-                </div>
-                <div class="text-container">
-                    <div class="card-title">${card.title}</div>
-                    <div class="card-body">${card.body}</div>
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="chat-input" 
+                            placeholder="Ask follow-up..."
+                            autocomplete="off"
+                        >
+                        <button class="chat-send-btn">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             `;
 
-            // Add event listeners for drag
-            cardEl.addEventListener('mousedown', handleDragStart);
-            cardEl.addEventListener('touchstart', handleDragStart);
+            // Add event listeners for drag (only on the card content, not the input)
+            const cardContent = cardEl.querySelector('.card-content-wrapper');
+            cardContent.addEventListener('mousedown', handleDragStart);
+            cardContent.addEventListener('touchstart', handleDragStart);
+
+            // Add event listener for chat input
+            const chatInput = cardEl.querySelector('.chat-input');
+            const chatSendBtn = cardEl.querySelector('.chat-send-btn');
+            
+            chatInput.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && chatInput.value.trim()) {
+                    openChatOverlay(card, chatInput.value.trim());
+                    chatInput.value = '';
+                }
+            });
+
+            chatSendBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (chatInput.value.trim()) {
+                    openChatOverlay(card, chatInput.value.trim());
+                    chatInput.value = '';
+                }
+            });
 
             return cardEl;
         }
@@ -510,6 +928,91 @@
 
             renderCards();
         }
+
+        // Chat Overlay Functions
+        let currentChatCard = null;
+        let chatMessages = [];
+
+        function openChatOverlay(card, initialMessage) {
+            currentChatCard = card;
+            chatMessages = [];
+
+            // Set card context
+            document.getElementById('chatContextTitle').textContent = card.title;
+            document.getElementById('chatContextBody').textContent = card.body;
+
+            // Add initial user message
+            addMessageToChat('user', initialMessage);
+
+            // Add AI placeholder response
+            setTimeout(() => {
+                addMessageToChat('ai', 'यह एक प्लेसहोल्डर उत्तर है। जल्द ही AI से वास्तविक उत्तर मिलेगा। (This is a placeholder response. Real AI integration coming soon.)');
+            }, 500);
+
+            // Show overlay
+            document.getElementById('chatOverlay').classList.add('active');
+            
+            // Focus on bottom input
+            document.getElementById('chatBottomInput').focus();
+        }
+
+        function closeChatOverlay() {
+            document.getElementById('chatOverlay').classList.remove('active');
+            document.getElementById('chatMessages').innerHTML = '';
+            document.getElementById('chatBottomInput').value = '';
+            currentChatCard = null;
+            chatMessages = [];
+        }
+
+        function addMessageToChat(type, text) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+
+            const avatar = type === 'user' ? '👤' : '🤖';
+
+            messageDiv.innerHTML = `
+                <div class="chat-message-avatar">${avatar}</div>
+                <div class="chat-message-bubble">
+                    <div class="chat-message-text">${text}</div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Store message
+            chatMessages.push({ type, text });
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatBottomInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addMessageToChat('user', message);
+            input.value = '';
+
+            // Simulate AI response (placeholder)
+            setTimeout(() => {
+                addMessageToChat('ai', 'धन्यवाद! मैं आपके सवाल को समझ रहा हूं। जल्द ही AI एकीकरण होने पर आपको विस्तृत जवाब मिलेगा। (Thank you! I understand your question. Detailed answers coming soon with AI integration.)');
+            }, 800);
+        }
+
+        // Event listeners for chat overlay
+        document.getElementById('chatCloseBtn').addEventListener('click', closeChatOverlay);
+        
+        document.getElementById('chatBottomInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+
+        document.getElementById('chatBottomSend').addEventListener('click', sendChatMessage);
 
         // Initialize app
         init();
