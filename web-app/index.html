@@ -937,9 +937,10 @@
         // Chat Overlay Functions
         let currentChatCard = null;
         let chatMessages = [];
-        const OPENROUTER_API_KEY = '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'; // Load from your .env in production
+        // Note: In production, load this from a secure backend endpoint
+        const OPENROUTER_API_KEY = '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';
 
-        async function callOpenRouterLLM(cardContext, userMessage, conversationHistory) {
+        async function callOpenRouterLLMStream(cardContext, userMessage, conversationHistory, onChunk) {
             try {
                 const messages = [
                     {
@@ -970,24 +971,49 @@ Answer their questions about this card in simple Hindi (or Hinglish). Be helpful
                     body: JSON.stringify({
                         model: 'openai/gpt-5.1',
                         messages: messages,
-                        extra_body: {
-                            reasoning: {
-                                enabled: true
-                            }
-                        }
+                        stream: true
                     })
                 });
 
                 if (!response.ok) {
-                    const errorData = await response.json();
+                    const errorData = await response.json().catch(() => ({ error: { message: 'API call failed' } }));
                     throw new Error(errorData.error?.message || 'API call failed');
                 }
 
-                const data = await response.json();
-                return data.choices[0].message.content;
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let fullResponse = '';
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n').filter(line => line.trim() !== '');
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data === '[DONE]') continue;
+
+                            try {
+                                const json = JSON.parse(data);
+                                const content = json.choices[0]?.delta?.content || '';
+                                if (content) {
+                                    fullResponse += content;
+                                    onChunk(fullResponse);
+                                }
+                            } catch (e) {
+                                // Skip invalid JSON
+                            }
+                        }
+                    }
+                }
+
+                return fullResponse;
             } catch (error) {
                 console.error('OpenRouter API Error:', error);
-                return `क्षमा करें, मुझे आपके सवाल का जवाब देने में समस्या आ रही है। कृपया फिर से कोशिश करें। (Sorry, I'm having trouble answering your question. Please try again.)`;
+                throw error;
             }
         }
 
@@ -1002,30 +1028,36 @@ Answer their questions about this card in simple Hindi (or Hinglish). Be helpful
             // Add initial user message
             addMessageToChat('user', initialMessage);
 
-            // Show loading indicator
-            const loadingMsg = addMessageToChat('ai', '⏳ जवाब तैयार कर रहा हूं...');
-
             // Show overlay
             document.getElementById('chatOverlay').classList.add('active');
             
             // Focus on bottom input
             document.getElementById('chatBottomInput').focus();
 
-            // Call LLM
-            const conversationHistory = chatMessages
-                .filter(msg => msg.type !== 'loading')
-                .map(msg => ({
-                    role: msg.type === 'user' ? 'user' : 'assistant',
-                    content: msg.text
-                }));
+            // Create AI message bubble for streaming
+            const aiMessageEl = addMessageToChat('ai', '⏳ जवाब तैयार कर रहा हूं...');
+            const aiTextEl = aiMessageEl.querySelector('.chat-message-text');
 
-            const aiResponse = await callOpenRouterLLM(card, initialMessage, conversationHistory);
+            try {
+                // Call LLM with streaming
+                await callOpenRouterLLMStream(
+                    card, 
+                    initialMessage, 
+                    [], 
+                    (chunk) => {
+                        aiTextEl.textContent = chunk;
+                        // Scroll to bottom as text streams
+                        const messagesContainer = document.getElementById('chatMessages');
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    }
+                );
 
-            // Remove loading message
-            loadingMsg.remove();
-
-            // Add AI response
-            addMessageToChat('ai', aiResponse);
+                // Store final message
+                chatMessages.push({ type: 'ai', text: aiTextEl.textContent });
+            } catch (error) {
+                aiTextEl.textContent = `क्षमा करें, मुझे आपके सवाल का जवाब देने में समस्या आ रही है। कृपया फिर से कोशिश करें। (Sorry, I'm having trouble. Please try again.)`;
+                console.error('Chat error:', error);
+            }
         }
 
         function closeChatOverlay() {
@@ -1055,8 +1087,12 @@ Answer their questions about this card in simple Hindi (or Hinglish). Be helpful
             // Scroll to bottom
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-            // Store message
-            chatMessages.push({ type, text });
+            // Store message (only if not loading)
+            if (text !== '⏳ जवाब तैयार कर रहा हूं...' && text !== '⏳ सोच रहा हूं...') {
+                chatMessages.push({ type, text });
+            }
+
+            return messageDiv;
         }
 
         async function sendChatMessage() {
@@ -1065,28 +1101,52 @@ Answer their questions about this card in simple Hindi (or Hinglish). Be helpful
 
             if (!message || !currentChatCard) return;
 
+            // Disable input while processing
+            input.disabled = true;
+            const sendBtn = document.getElementById('chatBottomSend');
+            sendBtn.disabled = true;
+
             // Add user message
             addMessageToChat('user', message);
             input.value = '';
 
-            // Show loading indicator
-            const loadingMsg = addMessageToChat('ai', '⏳ सोच रहा हूं...');
+            // Create AI message bubble for streaming
+            const aiMessageEl = addMessageToChat('ai', '⏳ सोच रहा हूं...');
+            const aiTextEl = aiMessageEl.querySelector('.chat-message-text');
 
-            // Call LLM with conversation history
-            const conversationHistory = chatMessages
-                .filter(msg => msg.type !== 'loading')
-                .map(msg => ({
-                    role: msg.type === 'user' ? 'user' : 'assistant',
-                    content: msg.text
-                }));
+            try {
+                // Build conversation history
+                const conversationHistory = chatMessages
+                    .filter(msg => msg.type !== 'loading')
+                    .map(msg => ({
+                        role: msg.type === 'user' ? 'user' : 'assistant',
+                        content: msg.text
+                    }));
 
-            const aiResponse = await callOpenRouterLLM(currentChatCard, message, conversationHistory);
+                // Call LLM with streaming
+                await callOpenRouterLLMStream(
+                    currentChatCard,
+                    message,
+                    conversationHistory,
+                    (chunk) => {
+                        aiTextEl.textContent = chunk;
+                        // Scroll to bottom as text streams
+                        const messagesContainer = document.getElementById('chatMessages');
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    }
+                );
 
-            // Remove loading message
-            loadingMsg.remove();
-
-            // Add AI response
-            addMessageToChat('ai', aiResponse);
+                // Store final message
+                chatMessages.push({ type: 'ai', text: aiTextEl.textContent });
+            } catch (error) {
+                aiTextEl.textContent = `क्षमा करें, मुझे आपके सवाल का जवाब देने में समस्या आ रही है। कृपया फिर से कोशिश करें। (Sorry, I'm having trouble. Please try again.)`;
+                console.error('Chat error:', error);
+            } finally {
+                // Re-enable input
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }
         }
 
         // Event listeners for chat overlay
